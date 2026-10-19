@@ -9,7 +9,7 @@ En este capítulo aprenderás cómo hacer que tu aplicación arranque siempre co
 Cuando estás desarrollando o mostrando tu proyecto a un profesor o colega, es muy frustrante iniciar la aplicación con la base de datos completamente vacía.
 Un **Seeder** (*sembrador de datos*) es un componente que se ejecuta automáticamente cuando Spring Boot termina de arrancar, e inserta registros de ejemplo en las tablas.
 
-En nuestro proyecto lo implementamos con **`CommandLineRunner`** en [DataSeederConfig.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/config/DataSeederConfig.java):
+En nuestro proyecto lo implementamos con **`CommandLineRunner`** en [DataSeederConfig.java](file:///c:/Users/Jhon/Desktop/Proyectos/citas/src/main/java/com/example/citas/config/DataSeederConfig.java):
 
 ```java
 package com.example.citas.config;
@@ -80,7 +80,7 @@ Porque si reinicias tu servidor 10 veces al día, no querrás tener 20 o 30 clie
 
 En lugar de tener que redactar documentos PDF desactualizados sobre cómo usar tu API, SpringDoc genera la especificación **OpenAPI 3** y una interfaz interactiva de forma automática.
 
-### A. Configuración Global ([OpenApiConfig.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/config/OpenApiConfig.java)):
+### A. Configuración Global ([OpenApiConfig.java](file:///c:/Users/Jhon/Desktop/Proyectos/citas/src/main/java/com/example/citas/config/OpenApiConfig.java)):
 ```java
 @Configuration
 public class OpenApiConfig {
@@ -101,7 +101,7 @@ public class OpenApiConfig {
 - **`@Operation(summary = "...", description = "...")`:** Explica en una frase qué hace el endpoint y qué condiciones requiere.
 
 ### C. Anotación `@Schema` en los DTOs:
-En nuestros DTOs (como [CitaRequestDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/CitaRequestDTO.java)):
+En nuestros DTOs (como [CitaRequestDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/citas/src/main/java/com/example/citas/dto/CitaRequestDTO.java)):
 ```java
 public record CitaRequestDTO(
     @Schema(description = "ID del cliente que solicita la cita", example = "1")
@@ -132,5 +132,18 @@ Una vez encendida la aplicación (`./mvnw spring-boot:run`):
    Abre en tu navegador:
    `http://localhost:8080/scalar`
    - Disfruta de un diseño oscuro ultra-rápido, con ejemplos de código listos para copiar en JavaScript (`fetch`), cURL, Python y más.
+
+3. **Descarga de la Especificación OpenAPI (JSON / YAML):**
+   Para descargar o consumir la definición OpenAPI (por ejemplo para importarla en Postman, Insomnia o Scalar):
+   - **JSON (OpenAPI Spec):**
+     `http://localhost:8080/v3/api-docs`
+   - **YAML (OpenAPI Spec):**
+     `http://localhost:8080/v3/api-docs.yaml`
+
+   > [!TIP]
+   > Puedes guardar directamente el archivo JSON desde tu navegador usando `Ctrl + S` en la URL `http://localhost:8080/v3/api-docs` o mediante cURL / PowerShell:
+   > ```bash
+   > curl -O http://localhost:8080/v3/api-docs
+   > ```
 
 En el último capítulo aprenderás cómo **empaquetar la aplicación con Docker y desplegarla en la nube en Render.com**.
