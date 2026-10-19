@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: citas-api
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon # o oregon, frankfurt, etc.
+    healthCheckPath: /v3/api-docs
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_URL
+        sync: false # Configurar en el dashboard de Render con la URL de tu base de datos PostgreSQL
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
