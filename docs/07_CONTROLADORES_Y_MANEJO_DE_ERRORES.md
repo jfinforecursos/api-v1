@@ -25,7 +25,7 @@ En una API REST profesional, el método HTTP define la **intención** de la acci
 
 ---
 
-## 3. Ejemplo Código a Código: [CitaController.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/controller/CitaController.java)
+## 3. Ejemplo Código a Código: [CitaController.java](../src/main/java/com/example/citas/controller/CitaController.java)
 
 Analicemos cómo está construido nuestro controlador de citas:
 
@@ -139,7 +139,7 @@ flowchart LR
     style Respuesta fill:#e0f2f1,stroke:#00796b,stroke-width:1.5px;
 ```
 
-Para solucionar esto, creamos un **Interprete Central de Errores** con `@RestControllerAdvice` ([GlobalExceptionHandler.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/exception/GlobalExceptionHandler.java)):
+Para solucionar esto, creamos un **Interprete Central de Errores** con `@RestControllerAdvice` ([GlobalExceptionHandler.java](../src/main/java/com/example/citas/exception/GlobalExceptionHandler.java)):
 
 ```java
 package com.example.citas.exception;
@@ -214,7 +214,7 @@ Cualquiera sea el error que ocurra en cualquier parte de la API, el cliente siem
 
 ---
 
-## 5. Configuración de CORS ([CorsConfig.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/config/CorsConfig.java))
+## 5. Configuración de CORS ([CorsConfig.java](../src/main/java/com/example/citas/config/CorsConfig.java))
 
 Los navegadores web bloquean por seguridad las peticiones cuando el frontend corre en un puerto o dominio distinto al backend (ej: React en `http://localhost:3000` y Spring en `http://localhost:8080`).
 

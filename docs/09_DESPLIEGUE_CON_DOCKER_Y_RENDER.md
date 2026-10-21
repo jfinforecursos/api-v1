@@ -48,7 +48,7 @@ flowchart LR
     style Cloud fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
 ```
 
-El archivo [Dockerfile](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/Dockerfile) contiene las instrucciones exactas:
+El archivo [Dockerfile](../Dockerfile) contiene las instrucciones exactas:
 
 ```dockerfile
 # =========================================================================
@@ -103,7 +103,7 @@ ENTRYPOINT ["sh", "-c", "java -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0
 
 ## 3. El archivo `.dockerignore`
 
-Al igual que `.gitignore`, [.dockerignore](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/.dockerignore) le dice a Docker qué carpetas no debe enviar al contenedor durante la compilación:
+Al igual que `.gitignore`, [.dockerignore](../.dockerignore) le dice a Docker qué carpetas no debe enviar al contenedor durante la compilación:
 ```
 target/
 .git/

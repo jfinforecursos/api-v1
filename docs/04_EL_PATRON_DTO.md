@@ -30,7 +30,7 @@ Cuando Spring intenta convertir la Entidad a JSON:
 - El cliente vuelve a tener citas...
 
 **Resultado:** El servidor colapsa arrojando un error de memoria `StackOverflowError` (*Bucle infinito de serialización*).
-**Solución con DTO:** [CitaResponseDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/CitaResponseDTO.java) solo incluye los datos que queremos mostrar del cliente ([ClienteResponseDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/ClienteResponseDTO.java)), cortando cualquier ciclo de raíz.
+**Solución con DTO:** [CitaResponseDTO.java](../src/main/java/com/example/citas/dto/CitaResponseDTO.java) solo incluye los datos que queremos mostrar del cliente ([ClienteResponseDTO.java](../src/main/java/com/example/citas/dto/ClienteResponseDTO.java)), cortando cualquier ciclo de raíz.
 
 ### B. Ataque de Sobre-envío (*Over-Posting / Mass Assignment*)
 Si aceptas directamente la entidad `Cita` en un `POST /api/citas`:
@@ -43,7 +43,7 @@ Un usuario malintencionado podría enviar en el JSON:
 }
 ```
 Y si tu entidad acepta esos valores directamente, el atacante habrá alterado el ID o el estado sin autorización.
-**Solución con DTO:** En [CitaRequestDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/CitaRequestDTO.java) **NO existe el campo `id`**. Es imposible que el cliente lo manipule porque la base de datos lo genera de forma autónoma.
+**Solución con DTO:** En [CitaRequestDTO.java](../src/main/java/com/example/citas/dto/CitaRequestDTO.java) **NO existe el campo `id`**. Es imposible que el cliente lo manipule porque la base de datos lo genera de forma autónoma.
 
 ### C. Fuga de Datos Confidenciales
 Imagina que en el futuro tu entidad `Cliente` almacena una contraseña o un costo interno confidencial. Si devuelves la entidad completa, esos datos viajarán por la red a la vista de cualquiera. Con un DTO de respuesta, solo viaja lo que tú decidas.
@@ -84,7 +84,7 @@ Java genera automáticamente en segundo plano:
 Para cada entidad del sistema tenemos dos tipos de DTOs:
 
 ### A. Para Citas:
-- **[CitaRequestDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/CitaRequestDTO.java) (Lo que el cliente envía al agendar):**
+- **[CitaRequestDTO.java](../src/main/java/com/example/citas/dto/CitaRequestDTO.java) (Lo que el cliente envía al agendar):**
   Solo pide los IDs de las entidades relacionadas y los datos de la cita:
   ```java
   public record CitaRequestDTO(
@@ -96,7 +96,7 @@ Para cada entidad del sistema tenemos dos tipos de DTOs:
       String estado
   ) {}
   ```
-- **[CitaResponseDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/CitaResponseDTO.java) (Lo que el cliente recibe tras agendar):**
+- **[CitaResponseDTO.java](../src/main/java/com/example/citas/dto/CitaResponseDTO.java) (Lo que el cliente recibe tras agendar):**
   Devuelve la información completa y formateada, incluyendo los DTOs completos de las relaciones y el pago si existe:
   ```java
   public record CitaResponseDTO(
@@ -112,11 +112,11 @@ Para cada entidad del sistema tenemos dos tipos de DTOs:
   ```
 
 ### B. Para Pagos:
-- **[PagoRequestDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/PagoRequestDTO.java):**
+- **[PagoRequestDTO.java](../src/main/java/com/example/citas/dto/PagoRequestDTO.java):**
   ```java
   public record PagoRequestDTO(Long citaId, Double monto, String metodoPago, LocalDateTime fechaPago) {}
   ```
-- **[PagoResponseDTO.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/dto/PagoResponseDTO.java):**
+- **[PagoResponseDTO.java](../src/main/java/com/example/citas/dto/PagoResponseDTO.java):**
   ```java
   public record PagoResponseDTO(Long id, Long citaId, Double monto, String metodoPago, LocalDateTime fechaPago) {}
   ```

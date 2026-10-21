@@ -13,7 +13,7 @@ Un **ORM (Mapeador Objeto-Relacional)** como Hibernate se encarga de traducir au
 
 ---
 
-## 2. La Superclase `@MappedSuperclass` ([BaseEntity.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/base/BaseEntity.java))
+## 2. La Superclase `@MappedSuperclass` ([BaseEntity.java](../src/main/java/com/example/citas/model/base/BaseEntity.java))
 
 En casi todas las aplicaciones reales, todas las tablas necesitan:
 1. Una clave primaria única (`id`).
@@ -56,7 +56,7 @@ public abstract class BaseEntity {
 - **`@EntityListeners(AuditingEntityListener.class)`:** Activa un observador de Spring que detecta cuándo se inserta o modifica un registro.
 - **`@CreatedDate`:** Spring asigna la fecha y hora actual automáticamente al hacer el primer guardado (`updatable = false` asegura que nunca sea modificada después).
 - **`@LastModifiedDate`:** Spring actualiza la marca de tiempo cada vez que se modifique cualquier atributo del registro.
-- **`@EnableJpaAuditing`:** Se coloca en [citasApplication.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/citasApplication.java) para encender este motor de auditoría automática.
+- **`@EnableJpaAuditing`:** Se coloca en [CitasApplication.java](../src/main/java/com/example/citas/CitasApplication.java) para encender este motor de auditoría automática.
 
 ---
 
@@ -65,7 +65,7 @@ public abstract class BaseEntity {
 Tanto los **Clientes** como los **Profesionales** tienen información de contacto: un `email` y un `telefono`.
 Para evitar duplicar atributos y modelar conceptos limpios de Programación Orientada a Objetos, creamos un **Objeto de Valor Embebido**:
 
-### La clase embebible ([Contacto.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/embeddable/Contacto.java)):
+### La clase embebible ([Contacto.java](../src/main/java/com/example/citas/model/embeddable/Contacto.java)):
 ```java
 package com.example.citas.model.embeddable;
 
@@ -85,7 +85,7 @@ public class Contacto {
 }
 ```
 
-### El uso en la entidad ([Cliente.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/entity/Cliente.java)):
+### El uso en la entidad ([Cliente.java](../src/main/java/com/example/citas/model/entity/Cliente.java)):
 ```java
 @Entity
 @Table(name = "clientes")
@@ -103,7 +103,7 @@ public class Cliente extends BaseEntity {
 
 ---
 
-## 4. Enumeraciones Tipadas ([EstadoCita.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/enums/EstadoCita.java) y [MetodoPago.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/enums/MetodoPago.java))
+## 4. Enumeraciones Tipadas ([EstadoCita.java](../src/main/java/com/example/citas/model/enums/EstadoCita.java) y [MetodoPago.java](../src/main/java/com/example/citas/model/enums/MetodoPago.java))
 
 En vez de permitir que un programador guarde cualquier texto libre como `"pendiente"`, `"Pendiente"` o `"pndiente"`, usamos **Java Enums** para restringir los valores permitidos:
 
@@ -189,14 +189,14 @@ erDiagram
 ### A. Relación Uno a Muchos (1:N): `Cliente` ➔ `Cita`
 Un cliente puede tener **muchas** citas registradas en el sistema.
 
-- **Lado "Muchos" ([Cita.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/entity/Cita.java)):**
+- **Lado "Muchos" ([Cita.java](../src/main/java/com/example/citas/model/entity/Cita.java)):**
   Lleva la clave foránea `cliente_id`:
   ```java
   @ManyToOne(optional = false)
   @JoinColumn(name = "cliente_id", nullable = false)
   private Cliente cliente;
   ```
-- **Lado "Uno" ([Cliente.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/entity/Cliente.java)):**
+- **Lado "Uno" ([Cliente.java](../src/main/java/com/example/citas/model/entity/Cliente.java)):**
   Tiene la lista de citas relacionadas:
   ```java
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -206,7 +206,7 @@ Un cliente puede tener **muchas** citas registradas en el sistema.
 ### B. Relación Uno a Uno (1:1): `Cita` ➔ `Pago`
 Cada cita agendada tiene **un único comprobante de pago** asociado, y cada pago pertenece exclusivamente a esa cita.
 
-- **En la entidad dueña de la relación ([Pago.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/entity/Pago.java)):**
+- **En la entidad dueña de la relación ([Pago.java](../src/main/java/com/example/citas/model/entity/Pago.java)):**
   ```java
   @OneToOne(optional = false)
   @JoinColumn(name = "cita_id", referencedColumnName = "id", unique = true, nullable = false)
@@ -214,7 +214,7 @@ Cada cita agendada tiene **un único comprobante de pago** asociado, y cada pago
   ```
   > `unique = true` le indica a la base de datos que la columna `cita_id` no puede repetirse en la tabla de pagos, garantizando una relación 1 a 1 estricta a nivel de base de datos.
 
-- **En la entidad inversa ([Cita.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/entity/Cita.java)):**
+- **En la entidad inversa ([Cita.java](../src/main/java/com/example/citas/model/entity/Cita.java)):**
   ```java
   @OneToOne(mappedBy = "cita", cascade = CascadeType.ALL)
   private Pago pago;

@@ -9,7 +9,7 @@ En este capítulo aprenderás cómo la capa de **Repositorios** elimina la neces
 En la arquitectura en capas, el **Repositorio** es el único componente autorizado para dialogar con la base de datos.
 En lugar de escribir código JDBC con conexiones manuales, controladores y cursores, en Spring Data JPA creamos una **interfaz** que extiende `JpaRepository`.
 
-Observa el código de [ClienteRepository.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/repository/ClienteRepository.java):
+Observa el código de [ClienteRepository.java](../src/main/java/com/example/citas/repository/ClienteRepository.java):
 
 ```java
 package com.example.citas.repository;
@@ -52,7 +52,7 @@ Spring Data JPA incluye una característica llamada **Derivación de Consultas a
 
 ### Ejemplos en nuestro proyecto:
 
-### A. En [ClienteRepository.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/repository/ClienteRepository.java) y [ProfesionalRepository.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/repository/ProfesionalRepository.java):
+### A. En [ClienteRepository.java](../src/main/java/com/example/citas/repository/ClienteRepository.java) y [ProfesionalRepository.java](../src/main/java/com/example/citas/repository/ProfesionalRepository.java):
 ```java
 boolean existsByContactoEmail(String email);
 ```
@@ -63,7 +63,7 @@ boolean existsByContactoEmail(String email);
 
 ---
 
-### B. En [CitaRepository.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/repository/CitaRepository.java):
+### B. En [CitaRepository.java](../src/main/java/com/example/citas/repository/CitaRepository.java):
 ```java
 // 1. Obtener todas las citas de un cliente (para la relación 1 a Muchos)
 List<Cita> findByClienteId(Long clienteId);
@@ -82,7 +82,7 @@ boolean existsByProfesionalIdAndFechaHora(Long profesionalId, LocalDateTime fech
 
 ---
 
-### C. En [PagoRepository.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/repository/PagoRepository.java):
+### C. En [PagoRepository.java](../src/main/java/com/example/citas/repository/PagoRepository.java):
 ```java
 // Buscar el pago correspondiente a una cita específica
 Optional<Pago> findByCitaId(Long citaId);

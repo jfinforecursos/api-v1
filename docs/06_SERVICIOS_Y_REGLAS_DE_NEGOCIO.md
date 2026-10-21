@@ -77,7 +77,7 @@ flowchart TD
 
 ### Regla 1: Anticipación de Citas en el Futuro
 * **Problema real:** Un usuario no puede agendar una cita médica en el pasado, ni tampoco agendarla para dentro de 5 minutos, porque el profesional no tendría tiempo de prepararse.
-* **Código en [CitaService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/CitaService.java#L58-L61):**
+* **Código en [CitaService.java](../src/main/java/com/example/citas/service/CitaService.java#L58-L61):**
   ```java
   if (dto.fechaHora().isBefore(LocalDateTime.now().plusHours(1))) {
       throw new ReglaDeNegocioException("La cita debe agendarse con al menos 1 hora de anticipación en una fecha y hora futura");
@@ -89,7 +89,7 @@ flowchart TD
 
 ### Regla 2: Prevención de Choque de Horarios (Agenda Libre del Profesional)
 * **Problema real:** Un médico o especialista no puede atender a dos pacientes en el mismo consultorio a la misma hora exacta.
-* **Código en [CitaService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/CitaService.java#L63-L66):**
+* **Código en [CitaService.java](../src/main/java/com/example/citas/service/CitaService.java#L63-L66):**
   ```java
   if (citaRepository.existsByProfesionalIdAndFechaHora(dto.profesionalId(), dto.fechaHora())) {
       throw new ReglaDeNegocioException("El profesional seleccionado ya cuenta con una cita agendada para la fecha y hora indicada");
@@ -101,7 +101,7 @@ flowchart TD
 
 ### Regla 3: Protección contra Eliminación de Citas con Pago Registrado
 * **Problema real:** Si un cliente ya pagó una cita, no podemos simplemente borrar el registro de la base de datos sin un proceso previo de anulación contable o reembolso.
-* **Código en [CitaService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/CitaService.java#L120-L125):**
+* **Código en [CitaService.java](../src/main/java/com/example/citas/service/CitaService.java#L120-L125):**
   ```java
   Cita cita = citaRepository.findById(id)
           .orElseThrow(() -> new RecursoNoEncontradoException("Cita no encontrada con id: " + id));
@@ -119,7 +119,7 @@ flowchart TD
 * **Problema real:**
   1. No se puede cobrar una cita que ya fue cancelada.
   2. El cliente no puede pagar una cantidad menor al precio fijado para el servicio contratado.
-* **Código en [PagoService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/PagoService.java#L53-L67):**
+* **Código en [PagoService.java](../src/main/java/com/example/citas/service/PagoService.java#L53-L67):**
   ```java
   // 1. Prohibido pagar citas canceladas
   if (cita.getEstado() == EstadoCita.CANCELADA) {
@@ -137,7 +137,7 @@ flowchart TD
 
 ### Regla 5: Restricción Estricta de Pago Único (Relación 1 a 1)
 * **Problema real:** Una cita no puede tener dos pagos duplicados.
-* **Código en [PagoService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/PagoService.java#L58-L61):**
+* **Código en [PagoService.java](../src/main/java/com/example/citas/service/PagoService.java#L58-L61):**
   ```java
   if (pagoRepository.existsByCitaId(dto.citaId())) {
       throw new ReglaDeNegocioException("La cita con id " + dto.citaId() + " ya cuenta con un pago registrado (relación 1 a 1)");
@@ -155,7 +155,7 @@ flowchart TD
 
 ### Regla 6: Unicidad de Correo Electrónico
 * **Problema real:** Dos clientes no pueden registrarse con el mismo correo electrónico.
-* **Código en [ClienteService.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/service/ClienteService.java#L39-L41):**
+* **Código en [ClienteService.java](../src/main/java/com/example/citas/service/ClienteService.java#L39-L41):**
   ```java
   if (clienteRepository.existsByContactoEmail(dto.email().trim())) {
       throw new ReglaDeNegocioException("Ya existe un cliente registrado con el email: " + dto.email());

@@ -30,9 +30,9 @@
   - **Relación 1 a Muchos (1:N):** `Cliente` posee múltiples `Citas`.
   - **Relación 1 a 1 (1:1):** Cada `Cita` tiene vinculado de forma exclusiva un único `Pago`.
 - **Composición y Herencia:**
-  - `@MappedSuperclass` ([BaseEntity.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/base/BaseEntity.java)) con auditoría automática de fechas (`@CreatedDate`, `@LastModifiedDate`).
-  - Objeto Embebido `@Embeddable` ([Contacto.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/embeddable/Contacto.java)) reutilizado en `Cliente` y `Profesional`.
-  - Enumeraciones tipadas ([EstadoCita.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/enums/EstadoCita.java), [MetodoPago.java](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/src/main/java/com/example/citas/model/enums/MetodoPago.java)).
+  - `@MappedSuperclass` ([BaseEntity.java](src/main/java/com/example/citas/model/base/BaseEntity.java)) con auditoría automática de fechas (`@CreatedDate`, `@LastModifiedDate`).
+  - Objeto Embebido `@Embeddable` ([Contacto.java](src/main/java/com/example/citas/model/embeddable/Contacto.java)) reutilizado en `Cliente` y `Profesional`.
+  - Enumeraciones tipadas ([EstadoCita.java](src/main/java/com/example/citas/model/enums/EstadoCita.java), [MetodoPago.java](src/main/java/com/example/citas/model/enums/MetodoPago.java)).
 - **6 Reglas de Negocio Reales:** Validación de agendas sin solapamiento, anticipación mínima, integridad de pagos y protección ante eliminación de registros pagados.
 - **Frontend SPA Premium:** Interfaz de usuario con Landing Page de alta conversión, asistente de reserva (Wizard en 5 pasos), tablero de control con filtros y emisión de comprobantes.
 
@@ -224,7 +224,7 @@ sequenceDiagram
 
 ## 💻 Aplicación Frontend (SerenityCare SPA)
 
-El proyecto incluye un cliente web moderno ubicado en la carpeta [`frontend/`](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/frontend):
+El proyecto incluye un cliente web moderno ubicado en la carpeta [`frontend/`](frontend):
 
 1. **Página de Inicio (Landing Page):**
    - Hero interactivo con fotografía clínica de alta fidelidad, métricas dinámicas traídas en vivo desde la base de datos y botones de acción rápida.
@@ -318,7 +318,7 @@ docker run -p 8080:8080 \
 ```
 
 ### Despliegue Automatizado en Render.com
-El archivo [`render.yaml`](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/render.yaml) contiene el Blueprint de infraestructura como código (IaC):
+El archivo [`render.yaml`](render.yaml) contiene el Blueprint de infraestructura como código (IaC):
 
 1. Conecta tu repositorio de GitHub en [Render Dashboard](https://dashboard.render.com).
 2. Selecciona **Blueprints** -> **New Blueprint Instance**.
@@ -330,17 +330,18 @@ El archivo [`render.yaml`](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/render
 
 ## 📚 Documentación y Tutorial Paso a Paso
 
-Si eres estudiante o estás aprendiendo desarrollo de software profesional con Spring Boot, consulta el curso completo y detallado incluido en la carpeta [`docs/`](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs):
+Si eres estudiante o estás aprendiendo desarrollo de software profesional con Spring Boot, consulta el curso completo y detallado incluido en la carpeta [`docs/`](docs):
 
-1. [**Capítulo 1: Introducción, Fundamentos y Arquitectura en Capas**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/01_INTRODUCCION_Y_ARQUITECTURA.md)
-2. [**Capítulo 2: Configuración del Proyecto, Maven y Dependencias**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/02_CONFIGURACION_Y_DEPENDENCIAS.md)
-3. [**Capítulo 3: Modelo de Datos, Entidades y Relaciones JPA**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/03_MODELO_Y_BASE_DE_DATOS.md)
-4. [**Capítulo 4: El Patrón DTO (Data Transfer Object) y Java Records**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/04_EL_PATRON_DTO.md)
-5. [**Capítulo 5: Repositorios y Persistencia con Spring Data JPA**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/05_REPOSITORIOS_Y_PERSISTENCIA.md)
-6. [**Capítulo 6: Capa de Servicio y Reglas de Negocio**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/06_SERVICIOS_Y_REGLAS_DE_NEGOCIO.md)
-7. [**Capítulo 7: Controladores REST y Manejo Global de Errores**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/07_CONTROLADORES_Y_MANEJO_DE_ERRORES.md)
-8. [**Capítulo 8: Datos Iniciales (Seeders) y Documentación con Swagger y Scalar**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/08_DATOS_INICIALES_Y_DOCUMENTACION.md)
-9. [**Capítulo 9: Contenedores con Docker y Despliegue en Render.com**](file:///c:/Users/Jhon/Desktop/Proyectos/b2-dto/docs/09_DESPLIEGUE_CON_DOCKER_Y_RENDER.md)
+1. [**Capítulo 1: Introducción, Fundamentos y Arquitectura en Capas**](docs/01_INTRODUCCION_Y_ARQUITECTURA.md)
+2. [**Capítulo 2: Configuración del Proyecto, Maven y Dependencias**](docs/02_CONFIGURACION_Y_DEPENDENCIAS.md)
+3. [**Capítulo 3: Modelo de Datos, Entidades y Relaciones JPA**](docs/03_MODELO_Y_BASE_DE_DATOS.md)
+4. [**Capítulo 4: El Patrón DTO (Data Transfer Object) y Java Records**](docs/04_EL_PATRON_DTO.md)
+5. [**Capítulo 5: Repositorios y Persistencia con Spring Data JPA**](docs/05_REPOSITORIOS_Y_PERSISTENCIA.md)
+6. [**Capítulo 6: Capa de Servicio y Reglas de Negocio**](docs/06_SERVICIOS_Y_REGLAS_DE_NEGOCIO.md)
+7. [**Capítulo 7: Controladores REST y Manejo Global de Errores**](docs/07_CONTROLADORES_Y_MANEJO_DE_ERRORES.md)
+8. [**Capítulo 8: Datos Iniciales (Seeders) y Documentación con Swagger y Scalar**](docs/08_DATOS_INICIALES_Y_DOCUMENTACION.md)
+9. [**Capítulo 9: Contenedores con Docker y Despliegue en Render.com**](docs/09_DESPLIEGUE_CON_DOCKER_Y_RENDER.md)
+10. [**Capítulo 10: Metodología Maestra para Adaptar este Proyecto a Cualquier Otra Idea de Negocio**](docs/10_GUIA_DE_ADAPTACION_A_OTRAS_IDEAS_DE_NEGOCIO.md)
 
 ---
 
